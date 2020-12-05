@@ -1,57 +1,33 @@
 package com.projects.linkedtree;
-import java.util.Arrays;
-import java.util.List;
 
-public class Main {
-
+public class Main extends GeneralTree{
 	public static void main(String[] args) {
-		Node<String> root = new Node<>("/user/rt/courses/");
-		
-		//lvl 1
-		Node<String> cs016 = new Node<>("cs016/");
-		Node<String> cs252 = new Node<>("cs252/");
-		root.addChild(cs016);
-		root.addChild(cs252);
-		//lvl 2
-		// left
-		Node<String> hw = new Node<>("homeworks/");
-		Node<String> prgm = new Node<>("programs/");
-		cs016.addChild("grades");
-		cs016.addChild(hw);
-		cs016.addChild(prgm);
-		// right
-		Node<String> prj = new Node<>("projects/");
-		cs252.addChild(prj);
-		cs252.addChild("grades");
-		//lvl 3
-		//left
-		hw.addChild("h1");
-		hw.addChild("h2");
-		hw.addChild("h3");
-		prgm.addChild("pr1");
-		prgm.addChild("pr2");
-		prgm.addChild("pr3");
-		//right
-		Node<String> papers = new Node<>("papers/");
-		Node<String> demos = new Node<>("demos/");
-		prj.addChild(papers);
-		prj.addChild(demos);
-		
-		//lvl 4
-		papers.addChild("buylow");
-		papers.addChild("sellhigh");
-		demos.addChild("market");
-		
-		
-		
-			
-		
-		
-	System.out.println(root.getData());
-				
-	
-	for(Node node : root.getChildren()) {
-		System.out.println(node.getData());
-	}
+	 
+	    Node root = new Node("/user/rt/courses");
+	    (root.child).add(new Node("cs016/"));
+	    (root.child).add(new Node("cs252/"));
+	    
+	    (root.child.get(0).child).add(new Node("grades"));
+	    (root.child.get(0).child).add(new Node("homeworks/"));
+	    (root.child.get(0).child).add(new Node("programs/"));
+	    (root.child.get(1).child).add(new Node("projects/"));
+	    (root.child.get(1).child).add(new Node("grades"));
+	    
+	    (root.child.get(0).child.get(1).child).add(new Node("hw1"));
+	    (root.child.get(0).child.get(1).child).add(new Node("hw2"));
+	    (root.child.get(0).child.get(1).child).add(new Node("hw3"));
+	    (root.child.get(0).child.get(2).child).add(new Node("pr1"));
+	    (root.child.get(0).child.get(2).child).add(new Node("pr2"));
+	    (root.child.get(0).child.get(2).child).add(new Node("pr3"));
+	    
+	    (root.child.get(1).child.get(0).child).add(new Node("papers/"));
+	    (root.child.get(1).child.get(0).child).add(new Node("demos/"));
+	    
+	    (root.child.get(1).child.get(0).child.get(0).child).add(new Node("buylow"));
+	    (root.child.get(1).child.get(0).child.get(0).child).add(new Node("sellhigh"));
+	    (root.child.get(1).child.get(0).child.get(1).child).add(new Node("market"));
+	    
+	 
+	    preOrder(root);
 	}
 }

@@ -1,15 +1,15 @@
+package com.projects.linkedtree;
+
 import java.util.ArrayList;
 import java.util.Stack;
 	 
 public class GeneralTree {
 
-	static class Node 
-	{
+	static class Node {
 	    String key;
 	    ArrayList<Node> child;
 	 
-	    public Node(String key)
-	    {
+	    public Node(String key) {
 	        this.key = key;
 	        child = new ArrayList<>();
 	    }
@@ -29,12 +29,10 @@ public class GeneralTree {
 	        // Store current node and pop from stack
 	        Node curr = nodes.pop();
 	 
-	        if (curr != null)
-	        {
+	        if (curr != null) {
 	            System.out.println(curr.key + " ");
 
-	            for(int i = curr.child.size() - 1; i >= 0; i--) 
-	            {
+	            for(int i = curr.child.size() - 1; i >= 0; i--) {
 	                nodes.add(curr.child.get(i));
 	            } 
 	        }
@@ -45,6 +43,5 @@ public class GeneralTree {
 	 
    //continue.....
 			
-		}
-		
-		
+	}
+}
