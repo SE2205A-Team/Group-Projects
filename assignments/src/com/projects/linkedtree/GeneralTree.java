@@ -25,8 +25,6 @@ public class GeneralTree {
 	    nodes.push(root);
 	
 	    while (!nodes.isEmpty()) {
-	         
-	        // Store current node and pop from stack
 	        Node curr = nodes.pop();
 	 
 	        if (curr != null) {
