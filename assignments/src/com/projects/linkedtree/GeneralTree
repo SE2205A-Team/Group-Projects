@@ -15,7 +15,7 @@ public class GeneralTree {
 	    }
 	}
 	 
-	// Function to traverse tree without recursion
+	// Pre-order traversal
 	static void preOrder(Node root) {
 	     
 	    // Stack used for storing nodes
