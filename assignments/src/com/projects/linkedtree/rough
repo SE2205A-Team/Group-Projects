@@ -1,0 +1,103 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
+public class Tree {
+	// Node class 
+    static class Node { 
+        public int val; 
+        public List<Node> children = new ArrayList<Node>(); 
+      
+        // Default constructor 
+        public Node() {} 
+      
+        public Node(int _val) 
+        { 
+            val = _val; 
+        } 
+      
+        public Node(int _val, List<Node> _children) 
+        { 
+            val = _val; 
+            children = _children; 
+        } 
+    }; 
+     
+    static class Push { 
+        public Node node; 
+        public int childrenIndex; 
+        public Push(Node _node, int _childrenIndex) 
+        { 
+            node = _node; 
+            childrenIndex = _childrenIndex; 
+        } 
+    } 
+        
+    int currentRootIndex = 0; 
+    Stack<Push> stack = new Stack<Push>(); 
+    ArrayList<Integer> postorderTraversal =  
+                        new ArrayList<Integer>(); 
+      
+    // Post-order traversal 
+    public ArrayList<Integer> postorder(Node root) 
+    { 
+        while (root != null || !stack.isEmpty()) { 
+            if (root != null) { 
+                  
+                // Push the root and it's index into the stack 
+                stack.push(new Push(root, currentRootIndex)); 
+                currentRootIndex = 0; 
+      
+                // If root does not have children, set to null
+                if (root.children.size() >= 1) { 
+                    root = root.children.get(0); 
+                } 
+                else { 
+                    root = null; 
+                } 
+                continue; 
+            } 
+      
+            // Pop the top of the stack and add it to our answer 
+            Push temp = stack.pop(); 
+            postorderTraversal.add(temp.node.val); 
+      
+      
+            while (!stack.isEmpty() && temp.childrenIndex ==  
+                    stack.peek().node.children.size() - 1) { 
+                temp = stack.pop(); 
+                  
+                postorderTraversal.add(temp.node.val); 
+            } 
+      
+            if (!stack.isEmpty()) { 
+                root = stack.peek().node.children.get( 
+                                        temp.childrenIndex + 1); 
+                currentRootIndex = temp.childrenIndex + 1; 
+            } 
+        } 
+      
+        return postorderTraversal; 
+    } 
+   
+    public static void main(String[] args) 
+    { 
+        Tree tree = new Tree(); 
+        Node root = new Node("/user/rt/courses/"); 
+      
+        root.children.add(new Node("cs016/")); 
+        root.children.add(new Node("cs252/"));  
+      
+        root.children.get(0).children.add(new Node("grades")); 
+        root.children.get(0).children.add(new Node("homeworks/")); 
+        root.children.get(0).children.add(new Node("programs/"));
+        
+        root.children.get(1).children.add(new Node("projects/")); 
+        root.children.get(1).children.add(new Node("grades")); 
+        
+        //continue....
+        
+        System.out.println(tree.postorder(root)); 
+    } 
+}
+
