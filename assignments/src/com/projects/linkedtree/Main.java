@@ -1,33 +1,59 @@
 package com.projects.linkedtree;
 
-public class Main extends GeneralTree{
+import java.io.File;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Main extends GeneralTree {
+	@SuppressWarnings("resource")
 	public static void main(String[] args) {
+		
+		String userInput = "";
+		Scanner scanner = new Scanner(System.in);
+		
+		System.out.print("Please input a directory: ");
+		userInput = scanner.next();
 	 
-	    Node root = new Node("/user/rt/courses");
-	    (root.child).add(new Node("cs016/"));
-	    (root.child).add(new Node("cs252/"));
+	    Node root = new Node(userInput);
 	    
-	    (root.child.get(0).child).add(new Node("grades"));
-	    (root.child.get(0).child).add(new Node("homeworks/"));
-	    (root.child.get(0).child).add(new Node("programs/"));
-	    (root.child.get(1).child).add(new Node("projects/"));
-	    (root.child.get(1).child).add(new Node("grades"));
+	    String newUserInput = "";
+		File directoryPath = new File(userInput);
+		      
+		String contents[] = directoryPath.list();
+		   
+		for(int i=0; i<contents.length; i++) {
+		    	  
+			Pattern p = Pattern.compile("[.]");
+			Matcher m = p.matcher(contents[i]);
+		    	 
+		    if(m.find()) {
+		    	(root.child).add(new Node(contents[i]));
+		    } else {
+		    	(root.child).add(new Node(contents[i]));
+		    	newUserInput = userInput + "\\" + contents[i];
+		    	File directoryPath2 = new File(newUserInput);
+			      
+				String contents2[] = directoryPath2.list();
+				   
+				for(int i2=0; i2<contents2.length; i2++) {
+				    	  
+					Pattern p2 = Pattern.compile("[.]");
+					Matcher m2 = p2.matcher(contents2[i]);
+				    	 
+				    if(m2.find()) {
+				    	(root.child.get(i).child).add(new Node(contents2[i2]));
+				    } else {
+				    	(root.child.get(i).child).add(new Node(contents2[i2]));
+				    	newUserInput = userInput + "\\" + contents2[i2];
+				    }
+				}
+		    }
+		}
 	    
-	    (root.child.get(0).child.get(1).child).add(new Node("hw1"));
-	    (root.child.get(0).child.get(1).child).add(new Node("hw2"));
-	    (root.child.get(0).child.get(1).child).add(new Node("hw3"));
-	    (root.child.get(0).child.get(2).child).add(new Node("pr1"));
-	    (root.child.get(0).child.get(2).child).add(new Node("pr2"));
-	    (root.child.get(0).child.get(2).child).add(new Node("pr3"));
-	    
-	    (root.child.get(1).child.get(0).child).add(new Node("papers/"));
-	    (root.child.get(1).child.get(0).child).add(new Node("demos/"));
-	    
-	    (root.child.get(1).child.get(0).child.get(0).child).add(new Node("buylow"));
-	    (root.child.get(1).child.get(0).child.get(0).child).add(new Node("sellhigh"));
-	    (root.child.get(1).child.get(0).child.get(1).child).add(new Node("market"));
-	    
-	 
+		System.out.println("\npreOrder:");
 	    preOrder(root);
+	    System.out.println("\npostOrder: ");
+	    postOrder(root);
 	}
 }

@@ -14,7 +14,7 @@ public class GeneralTree {
 	        child = new ArrayList<>();
 	    }
 	}
-	 
+	
 	// Pre-order traversal
 	static void preOrder(Node root) {
 	     
@@ -30,7 +30,7 @@ public class GeneralTree {
 	        Node curr = nodes.pop();
 	 
 	        if (curr != null) {
-	            System.out.println(curr.key + " ");
+	            System.out.println(curr.key);
 
 	            for(int i = curr.child.size() - 1; i >= 0; i--) {
 	                nodes.add(curr.child.get(i));
@@ -40,8 +40,27 @@ public class GeneralTree {
 	}
 	
 	static void postOrder(Node root) {
-	 
-   //continue.....
-			
-	}
+
+        // Stack used for storing nodes
+        Stack<Node> nodes = new Stack<>();
+
+        // Push current node onto stack
+        nodes.push(root);
+
+        while (!nodes.isEmpty()) {
+
+            // Store current node and pop from stack
+            Node curr = nodes.pop();
+
+            if (curr != null)
+            {
+                System.out.println(curr.key + " ");
+
+                for(int i = 0; i <= curr.child.size() - 1; i++) 
+                {
+                    nodes.add(curr.child.get(i));
+                } 
+            }
+        }
+    }
 }
